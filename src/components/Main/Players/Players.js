@@ -3,8 +3,9 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { addPlayerInLS, getPlayerLS } from '../../Utilities/Utilities';
 import Player from '../Player/Player';
+import Swal from 'sweetalert2'
 
-const Players = ({search,bookMark,addPlayerInList,players,setPlayers}) => {
+const Players = ({search,bookMark,addPlayerInList,players,setPlayers,prevPlayer,setPrevPlayer}) => {
 
 
     useEffect(()=>{
@@ -12,7 +13,13 @@ const Players = ({search,bookMark,addPlayerInList,players,setPlayers}) => {
         .then(res=>res.json())
         .then(data=>{
             if(data.player===null){
-                alert('not found')
+                Swal.fire({
+                    title: '<strong>Not Found</strong>',
+                    icon: 'info',
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    focusConfirm: false,
+                  })
                 return;
             }
             else{
